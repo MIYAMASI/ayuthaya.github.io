@@ -20,7 +20,6 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-color: #333;
-    max-width: 480px;
 }
 
 .nav-con {
@@ -220,6 +219,10 @@ footer h1 {
 }
 
 @media only screen and (max-width: 844px) {
+    body {
+        max-width: 360px;
+    }
+    
     .hamburgers {
         display: inline;
     }
@@ -277,4 +280,5 @@ footer h1 {
         color: #fff;
     }
 }
+
 
