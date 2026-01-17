@@ -123,9 +123,14 @@ nav {
         text-align: center;;
     }
 
+    .head-con p {
+        width: 100%;
+    }
+
     .menu {
         flex-direction: column;
         text-align: center;
+        display: none;
         margin: 0 auto;
         position: absolute;
         left: 0;
