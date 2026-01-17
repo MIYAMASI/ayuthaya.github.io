@@ -220,7 +220,7 @@ footer h1 {
 
 @media only screen and (max-width: 844px) {
     body {
-        max-width: 360px;
+        max-width: 300px;
     }
     
     .hamburgers {
@@ -280,5 +280,6 @@ footer h1 {
         color: #fff;
     }
 }
+
 
 
