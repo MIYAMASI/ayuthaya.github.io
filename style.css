@@ -18,7 +18,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
     background-color: #333;
 }
 
@@ -42,7 +41,6 @@ body {
 }
 
 .hamburgers {
-    display: inline-block;
     display: none;
     cursor: pointer;
 }
@@ -54,18 +52,6 @@ body {
     margin: 6px 0;
     border-radius: 15px;
     transition: 0.4s;
-}
-
-.change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
-}
-
-.change .bar2 {
-    opacity: 0;
-}
-
-.change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
 }
 
 .menu {
@@ -94,22 +80,20 @@ body {
 .head-con {
     padding-top: 200px;
     color: #ffffff;
+    text-align: center;
 }
 
 .head-con h1 {
     font-size: clamp(2.5rem, 8vw, 4.5rem);
     font-weight: 700;
-    margin-left: 10%;
 }
 
 .head-con h2 {
-    font-size: clamp(4rem, 8vw, 5rem);
-    margin-left: 330px;
+    font-size: clamp(3rem, 8vw, 5rem);
 }
 
-
 .main-con {
-    margin-top: 250px;
+    margin-top: 200px;
     width: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5));
     color: #fff;
@@ -146,24 +130,21 @@ body {
 }
 
 .con {
-    background-color: rgba(255, 255, 255, 0);
     border: 1px solid #fff;
     width: 85%;
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 auto 100px;
     border-radius: 25px;
     padding: 30px;
     display: flex;
     align-items: center;
     gap: 30px;
     transition: .7s;
-    margin-bottom: 100px;
 }
 
 .con:hover {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
     transform: translateY(-5px);
-    transition: .7s;
 }
 
 .con img {
@@ -171,11 +152,6 @@ body {
     height: 250px;
     border-radius: 50%;
     object-fit: cover;
-    flex-shrink: 0;
-}
-
-.text {
-    margin-left: 30px;
 }
 
 .text h2 {
@@ -188,6 +164,9 @@ body {
     line-height: 2;
     font-size: 1.1rem;
     font-weight: 300;
+    margin-top: 30px;
+    text-indent: 30px;
+    max-width: clamp(300px, 80vw, 1300px);
 }
 
 footer {
@@ -201,42 +180,28 @@ footer h1 {
     font-size: clamp(1rem, 8vw, 3rem);
     font-weight: 700;
     text-align: center;
-    animation-name: opacity;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-
+    animation: opacity 1s infinite;
 }
 
+@media (max-width: 844px) {
+    body {
+        background-attachment: scroll;
+    }
 
-.text p {
-    margin-top: 60px;
-    text-indent: 30px;
-    max-width: clamp(1300px, 10vw, 300px);
-    margin-right: 20px
-}
-
-@media only screen and (max-width: 844px) {
     .hamburgers {
         display: inline;
     }
-    
+
     .menu {
         display: none;
     }
 
     .head-con {
-        margin-left: 0;
-        text-align: center;
-        display: flex;
-        justify-content: center;
+        padding-top: 150px;
     }
 
-    .head-con h1 {
-        margin-left: 0;
-    }
-
-    .head-con h2 {
-        margin-left: 0;
+    .main-con {
+        margin-top: 150px;
     }
 
     .con {
@@ -252,22 +217,11 @@ footer h1 {
     .text h2 {
         font-size: 2rem;
     }
-
-    .main-con {
-        margin-top: 350px;
-    }
-
-    .son-main-con {
-        margin-top: 50px;
-        margin-left: 50px;
-    }
-
-
 }
 
 @keyframes opacity {
     from {
-        color: #000000;
+        color: #000;
     }
     to {
         color: #fff;
