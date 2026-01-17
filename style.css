@@ -16,7 +16,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    font-family: 'Kanit';
+    font-family: 'Kanit', sans-serif;
     font-weight: 500;
 }
 
@@ -114,6 +114,41 @@ nav {
     text-align: center;
 }
 
+.main-con {
+    display: flex;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,1));
+    padding: 4rem 4rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.con {
+    width: 60rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.con p {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #ffcc00;
+}
+
+.con h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+.con h2 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
 @media only screen and (max-width: 768px) {
     .head-con h1 {
         text-align: center;
@@ -125,6 +160,10 @@ nav {
 
     .head-con p {
         width: 100%;
+    }
+
+    .main-con {
+        flex-wrap: wrap;
     }
 
     .menu {
