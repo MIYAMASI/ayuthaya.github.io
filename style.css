@@ -20,6 +20,7 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-color: #333;
+    max-width: 480px;
 }
 
 .nav-con {
@@ -276,3 +277,4 @@ footer h1 {
         color: #fff;
     }
 }
+
