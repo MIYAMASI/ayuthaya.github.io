@@ -157,7 +157,7 @@ nav {
 }
 
 .card {
-    width: 60rem;
+    width: 30rem;
     border: 1px solid #fff;
     height: auto;
     padding: 2rem 2rem;
@@ -167,8 +167,8 @@ nav {
 
 .card img {
     border-radius: 15px;
-    width: 20rem;
-    height: 20rem;
+    width: 15rem;
+    height: 15rem;
     object-fit: cover;
 }
 
