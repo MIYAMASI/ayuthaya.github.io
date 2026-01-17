@@ -219,7 +219,7 @@ footer h1 {
     margin-right: 20px
 }
 
-@media only screen and (max-width: 844px) {
+@media only screen and (max-width: 480px) {
     .hamburgers {
         display: inline;
     }
@@ -259,6 +259,7 @@ footer h1 {
 
     .main-con {
         margin-top: 350px;
+        width: 100%;
     }
 
     .son-main-con {
