@@ -157,7 +157,7 @@ nav {
 }
 
 .card {
-    width: 30rem;
+    width: 60rem;
     border: 1px solid #fff;
     height: auto;
     padding: 2rem 2rem;
@@ -230,7 +230,20 @@ nav {
     }
 
     .card {
-        display: block;
-        width: 22.5rem;
+    width: 5rem;
+    border: 1px solid #fff;
+    height: auto;
+    padding: 0.5rem;
+    border-radius: 15px;
+    display: flex;
+    }
+
+    .card img {
+    border-radius: 15px;
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    display: flex;
+    margin: 0 auto;
     }
 }
