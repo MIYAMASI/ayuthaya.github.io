@@ -110,7 +110,7 @@ nav {
     color: #fff;
     font-size: clamp(0.5rem, 8vw, 1.2rem);
     font-weight: 400;
-    padding: 3rem clamp(1rem, 8vw, 7rem);
+    padding: 3rem clamp(1rem, 5vw, 7rem);
     text-align: center;
 }
 
