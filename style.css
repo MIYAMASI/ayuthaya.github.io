@@ -231,5 +231,6 @@ nav {
 
     .card {
         display: block;
+        width: 25rem;
     }
 }
