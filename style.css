@@ -178,12 +178,12 @@ nav {
 
 .card h1 {
     color: #ffcc00;
-    font-size: clamp(1rem, 7vw, 3rem);
+    font-size: clamp(0.3rem, 7vw, 1.5rem);
 }
 
 .card p {
     color: #fff;
-    font-size: clamp(0.75rem, 7vw, 1.1rem);
+    font-size: clamp(0.25rem, 7vw, 0.96rem);
 }
 
 @media only screen and (max-width: 768px) {
@@ -231,6 +231,6 @@ nav {
 
     .card {
         display: block;
-        width: 25rem;
+        width: 22.5rem;
     }
 }
