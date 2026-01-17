@@ -1,49 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>อยุธยา เมืองเก่า</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="Frameworks/aos.css">
-</head>
-<body>
-    <div class="container">
-        <nav>
-            <div class="nav-con">
-                <div class="logo">
-                    <h1>การท่องเที่ยว</h1>
-                    </div>
+@import url('Fonts/Kanit/kanit.css');
 
-                    <div class="hamburgers" onclick="change(this)">
-                        <div class="bar1"></div>
-                        <div class="bar2"></div>
-                        <div class="bar3"></div>
-                    </div>
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
-                <ul class="menu">
-                    <li><a href="#">หน้าเเรก</a></li>
-                    <li><a href="#">หน้าเเรก</a></li>
-                    <li><a href="#">หน้าเเรก</a></li>
-                    <li><a href="#">หน้าเเรก</a></li>
-                    <li><a href="#">หน้าเเรก</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+html {
+    scroll-behavior: smooth;
+}
 
-    <div class="head-con">
-        <h1>จังหวัดพระนครศรี</h1>
-        <h2>อยุธยา</h2>
-        <p>เป็นอดีตราชธานีของไทยมีหลักฐานของการเป็นเมืองในลุ่มแม่น้ำเจ้าพระยา ตั้งแต่ประมาณพุทธศตวรรษที่ 16 - 18 โดยมีร่องรอยของที่ตั้งเมือง โบราณสถาน โบราณวัตถุ และเรื่องราวเหตุการณ์ในลักษณะ ตำนานพงศาวดาร ไปจนถึงหลักศิลา จารึก ซึ่งถือว่าเป็นหลักฐานร่วมสมัยที่ใกล้เคียงเหตุการณ์มากที่สุด ซึ่งเมืองอโยธยา หรืออโยธยาศรีรามเทพนคร หรือเมืองพระราม มีที่ตั้งอยู่บริเวณด้านตะวันออกของ เกาะเมืองอยุธยา มีบ้านเมืองที่มีความเจริญทางการเมือง การปกครอง และมีวัฒนธรรม ที่รุ่งเรืองแห่งหนึ่ง มีการใช้กฎหมายในการปกครองบ้านเมือง 3 ฉบับ คือ พระอัยการ ลักษณะเบ็ดเสร็จ พระอัยการลักษณะทาส พระอัยการลักษณะกู้หนี้</p>
-    </div>
+body {
+    background-image: url(big.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Kanit';
+    font-weight: 500;
+}
 
-    <script src="Frameworks/aos.js"></script>
+.container {
+    width: 100%;
+}
 
-    <script>
-        function change(x) {
-            x.classList.toggle("change")
-        }
-    </script>
-</body>
-</html>
+nav {
+    width: 100%;
+    height: 60px;
+}
+
+.nav-con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.875rem;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.1), rgb(0,0,0));
+}
+
+.logo {
+    font-size: 0.75rem;
+    padding: 0.75rem 1.875rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.hamburgers {
+    flex-direction: column;
+    display: none;
+}
+
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #fff;
+    margin: 3px 0;
+    border-radius: 25px;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+}
+
+.menu {
+    display: flex;
+}
+
+.menu li {
+    list-style: none;
+    margin: 0 1.25rem;
+}
+
+.menu li a{
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.head-con {
+    text-align: center;
+    padding: 8rem 0rem;
+}
+
+.head-con h1 {
+    color: #fff;
+    font-size: clamp(2.5rem, 5vw, 6rem);
+    padding: 0rem 1rem;
+}
+
+.head-con h2 {
+    color: #ffcc00;
+    font-size: clamp(2.5rem, 5vw, 6rem);
+    font-weight: 500;
+}
+
+.head-con p {
+    color: #fff;
+    font-size: clamp(0.5rem, 8vw, 1.2rem);
+    max-width: clamp(300px, 8vw 1200px);
+    font-weight: 400;
+    padding: 3rem 3rem;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .head-con h1 {
+        text-align: center;
+    }
+
+    .head-con h2 {
+        text-align: center;;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .logo {
+        text-align: center;
+        padding: 0.75rem 0rem;
+    }
+
+    .hamburgers {
+        display: flex;
+    }
+}
