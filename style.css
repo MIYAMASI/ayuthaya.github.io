@@ -236,6 +236,8 @@ nav {
     padding: 0.5rem;
     border-radius: 15px;
     display: flex;
+    width: 20rem;
+    flex-direction: column;
     }
 
     .card img {
