@@ -149,6 +149,43 @@ nav {
     font-weight: 500;
 }
 
+.card-con {
+    background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,1));
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 60rem;
+    border: 1px solid #fff;
+    height: auto;
+    padding: 2rem 2rem;
+    border-radius: 15px;
+    display: flex;
+}
+
+.card img {
+    border-radius: 15px;
+    width: 20rem;
+    height: 20rem;
+    object-fit: cover;
+}
+
+.card-text {
+    padding: 2rem;
+}
+
+.card h1 {
+    color: #ffcc00;
+    font-size: clamp(1rem, 7vw, 3rem);
+}
+
+.card p {
+    color: #fff;
+    font-size: clamp(0.75rem, 7vw, 1.1rem);
+}
+
 @media only screen and (max-width: 768px) {
     .head-con h1 {
         text-align: center;
@@ -190,5 +227,9 @@ nav {
 
     .hamburgers {
         display: flex;
+    }
+
+    .card {
+        display: block;
     }
 }
