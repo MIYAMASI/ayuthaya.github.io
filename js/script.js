@@ -1,8 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 import { 
   getAuth, 
-  GoogleAuthProvider, 
-  signInWithPopup, 
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   onAuthStateChanged 
 } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 import { 
@@ -30,7 +30,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
-const provider = new GoogleAuthProvider();
 
 // Global User State
 let currentUser = null;
@@ -40,7 +39,12 @@ let userData = { username: "", vouchers: 5, pityFeatured: 0, pityPrime: 0 };
 const authModal = document.getElementById("auth-modal");
 const loginStep = document.getElementById("login-step");
 const usernameStep = document.getElementById("username-step");
-const googleLoginBtn = document.getElementById("google-login-btn");
+
+const emailInput = document.getElementById("email-input");
+const passwordInput = document.getElementById("password-input");
+const emailLoginBtn = document.getElementById("email-login-btn");
+const emailRegisterBtn = document.getElementById("email-register-btn");
+
 const saveUsernameBtn = document.getElementById("save-username-btn");
 const usernameInput = document.getElementById("username-input");
 
@@ -48,7 +52,6 @@ const usernameInput = document.getElementById("username-input");
 // 2. AUTHENTICATION & DATABASE SYSTEM
 // ==========================================
 
-// ฟังก์ชันเปิด/ปิด/สลับหน้าต่าง Auth ควบคุมให้เด็ดขาด
 function switchAuthStep(step) {
   if (!authModal) return;
 
@@ -65,10 +68,16 @@ function switchAuthStep(step) {
   }
 }
 
-if (googleLoginBtn) {
-  googleLoginBtn.addEventListener("click", async () => {
+// ระบบเข้าสู่ระบบ (Login)
+if (emailLoginBtn) {
+  emailLoginBtn.addEventListener("click", async () => {
+    const email = emailInput ? emailInput.value.trim() : "";
+    const password = passwordInput ? passwordInput.value.trim() : "";
+
+    if (!email || !password) return alert("กรุณากรอก อีเมล และ รหัสผ่านให้ครบถ้วน!");
+
     try {
-      await signInWithPopup(auth, provider);
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       console.error("Login Error:", error);
       alert(`เข้าสู่ระบบไม่สำเร็จ: ${error.message}`);
@@ -76,7 +85,26 @@ if (googleLoginBtn) {
   });
 }
 
-// ตรวจสอบสถานะการล็อกอินแบบการันตีเรียงลำดับ
+// ระบบสมัครสมาชิก (Register)
+if (emailRegisterBtn) {
+  emailRegisterBtn.addEventListener("click", async () => {
+    const email = emailInput ? emailInput.value.trim() : "";
+    const password = passwordInput ? passwordInput.value.trim() : "";
+
+    if (!email || !password) return alert("กรุณากรอก อีเมล และ รหัสผ่านให้ครบถ้วน!");
+    if (password.length < 6) return alert("รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร");
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("สมัครสมาชิกสำเร็จ!");
+    } catch (error) {
+      console.error("Register Error:", error);
+      alert(`สมัครสมาชิกไม่สำเร็จ: ${error.message}`);
+    }
+  });
+}
+
+// ตรวจสอบสถานะ Authentication
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     currentUser = user;
@@ -85,7 +113,6 @@ onAuthStateChanged(auth, async (user) => {
     try {
       let snapshot = await get(userRef);
 
-      // ถ้ายังไม่มีข้อมูลใน DB ให้สร้างข้อมูลเริ่มต้นก่อน
       if (!snapshot.exists()) {
         await set(userRef, {
           email: user.email || "",
@@ -95,20 +122,18 @@ onAuthStateChanged(auth, async (user) => {
           pityPrime: 0,
           createdAt: Date.now()
         });
-        snapshot = await get(userRef); // ดึงข้อมูลใหม่อีกรอบ
+        snapshot = await get(userRef);
       }
 
       const data = snapshot.val() || {};
 
-      // ตรวจสอบว่ามีชื่อผู้จัดการหรือยัง
       if (data.username && data.username.trim() !== "") {
         userData.username = data.username;
-        switchAuthStep("close"); // มีชื่อแล้ว ปิด Pop-up
+        switchAuthStep("close");
       } else {
-        switchAuthStep("username"); // ยังไม่มีชื่อ บังคับเปิดหน้ากรอกชื่อ
+        switchAuthStep("username");
       }
 
-      // ซิงค์ข้อมูล Realtime
       onValue(userRef, (snap) => {
         if (snap.exists()) {
           userData = snap.val();
@@ -133,7 +158,6 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// บันทึกชื่อผู้จัดการทีม
 if (saveUsernameBtn) {
   saveUsernameBtn.addEventListener("click", async () => {
     const name = usernameInput ? usernameInput.value.trim() : "";
@@ -417,10 +441,8 @@ const playerDetailsController = {
 
     if (player.leagueImg) {
       const lImg = document.getElementById("pd-league-img");
-      const lDiv = document.getElementById("pd-league-divider");
       const lTxt = document.getElementById("pd-league-text");
       if (lImg) { lImg.src = player.leagueImg; lImg.style.display = "inline-block"; }
-      if (lDiv) lDiv.style.display = "inline";
       if (lTxt) lTxt.textContent = player.leagueText || "";
     }
 
@@ -441,7 +463,7 @@ const playerDetailsController = {
     setElText("pd-stat-def", stats.def);
     setElText("pd-stat-phy", stats.phy);
 
-    playerDetailsScreen.style.display = "block";
+    playerDetailsScreen.style.display = "flex";
   },
 
   close() {
