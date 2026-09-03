@@ -40,6 +40,7 @@ let userData = { username: "", vouchers: 5, pityFeatured: 0, pityPrime: 0 };
 const authModal = document.getElementById("auth-modal");
 const loginStep = document.getElementById("login-step");
 const usernameStep = document.getElementById("username-step");
+const googleLoginBtn = document.getElementById("google-login-btn");
 const saveUsernameBtn = document.getElementById("save-username-btn");
 const usernameInput = document.getElementById("username-input");
 
@@ -47,7 +48,7 @@ const usernameInput = document.getElementById("username-input");
 // 2. AUTHENTICATION & DATABASE SYSTEM
 // ==========================================
 
-// ฟังก์ชันเปิด/ปิด/สลับหน้าต่าง Auth
+// ฟังก์ชันเปิด/ปิด/สลับหน้าต่าง Auth ควบคุมให้เด็ดขาด
 function switchAuthStep(step) {
   if (!authModal) return;
 
@@ -64,42 +65,28 @@ function switchAuthStep(step) {
   }
 }
 
-// ผูก Event Listener ผ่าน Event Delegation เพื่อป้องกันปัญหาปุ่มกดไม่ได้
-document.addEventListener("click", async (e) => {
-  const btn = e.target.closest("#google-login-btn");
-  if (btn) {
-    e.preventDefault();
-    console.log("กำลังเปิดหน้าต่าง Google Sign-In...");
+if (googleLoginBtn) {
+  googleLoginBtn.addEventListener("click", async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      console.log("เข้าสู่ระบบสำเร็จ:", result.user);
+      await signInWithPopup(auth, provider);
     } catch (error) {
       console.error("Login Error:", error);
-      alert(`เข้าสู่ระบบไม่สำเร็จ: ${error.message}\nข้อผิดพลาด: ${error.code}`);
+      alert(`เข้าสู่ระบบไม่สำเร็จ: ${error.message}`);
     }
-  }
-});
+  });
+}
 
-// ตรวจสอบสถานะการล็อกอิน
+// ตรวจสอบสถานะการล็อกอินแบบการันตีเรียงลำดับ
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     currentUser = user;
     const userRef = ref(db, `users/${user.uid}`);
     
     try {
-      const snapshot = await get(userRef);
+      let snapshot = await get(userRef);
 
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        if (data.username && data.username.trim() !== "") {
-          // มีชื่อแล้ว -> ปิด Pop-up
-          switchAuthStep("close");
-        } else {
-          // ยังไม่มีชื่อ -> ไปหน้าตั้งชื่อ
-          switchAuthStep("username");
-        }
-      } else {
-        // บัญชีใหม่ -> บันทึกข้อมูลเริ่มต้นลง Database
+      // ถ้ายังไม่มีข้อมูลใน DB ให้สร้างข้อมูลเริ่มต้นก่อน
+      if (!snapshot.exists()) {
         await set(userRef, {
           email: user.email || "",
           username: "",
@@ -108,8 +95,17 @@ onAuthStateChanged(auth, async (user) => {
           pityPrime: 0,
           createdAt: Date.now()
         });
-        // ไปหน้าตั้งชื่อ
-        switchAuthStep("username");
+        snapshot = await get(userRef); // ดึงข้อมูลใหม่อีกรอบ
+      }
+
+      const data = snapshot.val() || {};
+
+      // ตรวจสอบว่ามีชื่อผู้จัดการหรือยัง
+      if (data.username && data.username.trim() !== "") {
+        userData.username = data.username;
+        switchAuthStep("close"); // มีชื่อแล้ว ปิด Pop-up
+      } else {
+        switchAuthStep("username"); // ยังไม่มีชื่อ บังคับเปิดหน้ากรอกชื่อ
       }
 
       // ซิงค์ข้อมูล Realtime
