@@ -1,65 +1,165 @@
-</html>
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Draft Game UI</title>
-
-    <!-- เร่งการเชื่อมต่อกับ ImgBB Server -->
-    <link rel="preconnect" href="https://i.ibb.co">
-    <link rel="dns-prefetch" href="https://i.ibb.co">
-
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Football Manager Draft</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="orientation-warning">กรุณาหมุนโทรศัพท์เป็นแนวนอน 📱🔄</div>
 
-    <audio id="bgm-player" preload="auto"></audio>
+  <!-- Audio Players -->
+  <audio id="bgm-player" preload="auto"></audio>
+  <audio id="walkout-audio" preload="auto"></audio>
 
-    <div class="game-wrapper">
-        <header class="top-bar">
-            <div class="top-left">
-                <button class="icon-btn back-btn">❮</button>
-                <h1 id="profile-name">โอนย้าย</h1>
-            </div>
-            <div class="top-right">
-                <div class="currency-badge">
-                    <img src="assets/images/transfer_voucher.png" alt="Transfer Voucher" class="currency-icon">
-                    <span id="voucher-count">5</span>
-                    <button id="cheat-btn" class="add-btn">+</button>
-                </div>
-            </div>
-        </header>
+  <!-- Auth & Profile Modal (หน้าต่างเข้าสู่ระบบ Email/Password) -->
+  <div id="auth-modal" class="auth-overlay">
+    <div class="auth-box">
+      <!-- Step 1: เข้าสู่ระบบ / สมัครสมาชิก -->
+      <div id="login-step">
+        <h2 id="auth-title">Football Manager Draft</h2>
+        <p id="auth-desc">เข้าสู่ระบบเพื่อบันทึกข้อมูลตั๋วและทีมของคุณ</p>
+        
+        <div class="auth-input-group">
+          <input type="email" id="email-input" placeholder="อีเมล (Email)" required>
+          <input type="password" id="password-input" placeholder="รหัสผ่าน (Password)" required>
+        </div>
 
-        <div class="main-layout">
-            <aside class="sidebar">
-                <div class="menu-item active">
-                    <div class="menu-left">
-                        <div class="menu-text">เเเพ็กวิหารตำนาน A</div>
-                        <div class="menu-badge hot">ฮอต</div>
-                    </div>
-                    <img src="assets/images/frames/frame_pantheon_prime_featured.png" class="sidebar-card-img" alt="Card Frame">
-                </div>
-            </aside>
+        <button id="email-login-btn" class="btn-primary">เข้าสู่ระบบ</button>
+        <button id="email-register-btn" class="btn-secondary">สมัครสมาชิก</button>
+      </div>
 
-            <main class="content-area">
-                <div class="banner-title">
-                    <h2>เเเพ็กวิหารตำนาน A</h2>
-                    <span class="timer">⏱ สิ้นสุดใน: 7 วัน</span>
-                </div>
+      <!-- Step 2: สร้างชื่อผู้จัดการทีม -->
+      <div id="username-step" style="display: none;">
+        <h2>สร้างชื่อผู้จัดการทีม</h2>
+        <p>ระบุชื่อที่จะใช้แสดงในเกมของคุณ</p>
+        <input type="text" id="username-input" placeholder="พิมพ์ชื่อผู้จัดการทีม..." maxlength="15">
+        <button id="save-username-btn" class="btn-save">เริ่มเกม!</button>
+      </div>
+    </div>
+  </div>
 
-                <div id="loading-spinner" style="display: none; color: #d4af37; font-weight: bold; margin-bottom: 20px; text-shadow: 1px 1px 2px #000;">
-                    ⏳ กำลังโหลดข้อมูลนักเตะ...
-                </div>
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Header / Navbar -->
+    <header class="main-header">
+      <div class="user-info">
+        <span class="user-label">ผู้จัดการทีม:</span>
+        <span id="profile-name" class="user-value">กำลังโหลด...</span>
+      </div>
+      <div class="header-status">
+        <div class="status-item">
+          <span>ตั๋วดราฟต์:</span>
+          <strong id="voucher-count">0</strong>
+        </div>
+        <div class="status-item">
+          <span>การันตีการ์ดดี:</span>
+          <strong id="featured-pity">10</strong>
+        </div>
+        <div class="status-item">
+          <span>การันตี Prime:</span>
+          <strong id="prime-pity">60</strong>
+        </div>
+      </div>
+    </header>
 
-                <div id="featured-players-container" class="featured-players"></div>
+    <!-- Main Content -->
+    <main class="content-area">
+      <!-- Section: Featured Players -->
+      <section class="featured-section">
+        <h1 class="section-title">นักเตะไฮไลท์ประจำสัปดาห์</h1>
+        <div id="featured-players-container" class="featured-grid">
+          <!-- การ์ดนักเตะไฮไลท์จะถูกสร้างที่นี่ผ่าน JavaScript -->
+        </div>
+      </section>
 
-                <div class="right-control-panel">
-                    <div class="pity-container">
-                        <div class="pity-row">
-                            <div class="pity-tag featured-tag">ชุด Featured</div>
+      <!-- Section: Draft Controls -->
+      <section class="controls-section">
+        <div class="action-buttons">
+          <button id="draw-1-btn" class="btn-action">ดราฟต์ 1 ครั้ง (ใช้ 1 ตั๋ว)</button>
+          <button id="draw-10-btn" class="btn-action btn-highlight">ดราฟต์ 10 ครั้ง (ใช้ 10 ตั๋ว)</button>
+        </div>
+        <div class="dev-controls">
+          <button id="cheat-btn" class="btn-dev">+10 ตั๋วฟรี (ทดสอบ)</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Screen: Walkout Animation -->
+  <div id="walkout-screen" class="overlay-screen" style="display: none;">
+    <div class="walkout-content">
+      <div class="wo-info">
+        <img id="wo-nation" class="wo-icon" src="" alt="Nation">
+        <span id="wo-pos" class="wo-pos-text"></span>
+        <img id="wo-team" class="wo-icon" src="" alt="Team">
+      </div>
+      <div id="wo-card-reveal" class="wo-card-container">
+        <!-- การ์ดแสดงผลช่วง Walkout -->
+      </div>
+      <p class="click-hint">คลิกที่ใดก็ได้เพื่อข้าม...</p>
+    </div>
+  </div>
+
+  <!-- Screen: Summary Screen (สรุปผลการดราฟต์) -->
+  <div id="summary-screen" class="overlay-screen" style="display: none;">
+    <div class="summary-box">
+      <h2>ผลการดราฟต์นักเตะ</h2>
+      <div id="summary-card-container" class="summary-grid">
+        <!-- รายการการ์ดที่สุ่มได้จะมาแสดงตรงนี้ -->
+      </div>
+      <button id="btn-next" class="btn-primary">ตกลง</button>
+    </div>
+  </div>
+
+  <!-- Screen: Player Details Modal (หน้ารายละเอียดนักเตะ) -->
+  <div id="player-details-screen" class="overlay-screen" style="display: none;">
+    <div class="details-box">
+      <button class="btn-close" onclick="closePlayerDetails()">×</button>
+      <div class="pd-header">
+        <span id="pd-first-name" class="pd-sub"></span>
+        <h2 id="pd-last-name" class="pd-title"></h2>
+        <div class="pd-meta">
+          <span id="pd-pos-label" class="pd-badge"></span>
+          <span class="pd-ovr">OVR <strong id="pd-ovr-val">0</strong></span>
+        </div>
+      </div>
+      
+      <div class="pd-body">
+        <div class="pd-info-row">
+          <div>ความสูง: <span id="pd-height">0</span> cm</div>
+          <div>น้ำหนัก: <span id="pd-weight">0</span> kg</div>
+        </div>
+        <div class="pd-info-row">
+          <div>สโมสร: <img id="pd-team-img" class="micro-icon"><span id="pd-team-text"></span></div>
+          <div>สัญชาติ: <img id="pd-nation-img" class="micro-icon"><span id="pd-nation-text"></span></div>
+        </div>
+        <div class="pd-info-row">
+          <div id="pd-league-container">
+            ลีก: <img id="pd-league-img" class="micro-icon"><span id="pd-league-text"></span>
+          </div>
+        </div>
+        <div class="pd-ratings">
+          <div>พลังกาย: <span id="pd-stamina"></span></div>
+          <div>ท่าไม้ตาย: <span id="pd-skill-moves"></span></div>
+        </div>
+        <div class="pd-stats-grid">
+          <div>PAC: <strong id="pd-stat-pac">0</strong></div>
+          <div>SHO: <strong id="pd-stat-sho">0</strong></div>
+          <div>PAS: <strong id="pd-stat-pas">0</strong></div>
+          <div>DRI: <strong id="pd-stat-dri">0</strong></div>
+          <div>DEF: <strong id="pd-stat-def">0</strong></div>
+          <div>PHY: <strong id="pd-stat-phy">0</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script type="module" src="js/script.js"></script>
+</body>
+</html>
+<div class="pity-tag featured-tag">ชุด Featured</div>
                             <div class="pity-text">หรือรับประกันสูงกว่าใน:</div>
                             <div class="pity-count-box">
                                 <strong id="featured-pity">10</strong> ดราฟต์
