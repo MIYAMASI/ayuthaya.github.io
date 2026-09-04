@@ -297,7 +297,7 @@ button, a { outline: none; }
 
     .right-control-panel { bottom: 25px; right: 40px; gap: 12px; }
 
-    #pd-card-container { transform: scale(1.2); margin-bottom: 0; }
+    #pd-card-container { transform: scale(2.5); margin-bottom: 0; }
     .pd-layout { max-width: 1200px; margin: 0 auto; gap: 4vw; }
     .pd-first-name { font-size: 1.2rem; }
     .pd-last-name { font-size: 2rem; }
@@ -312,7 +312,7 @@ button, a { outline: none; }
     .pd-fb-header { font-size: 0.9rem; }
     .pd-ui-ps-icon { width: 55px; height: 48px; }
 
-    #summary-card-container { transform: scale(2); }
+    #summary-card-container { transform: scale(2.5); }
     #summary-card-container.summary-grid-10 { gap: 20px 30px; }
     .summary-header h2 { font-size: 1.8rem; }
     .summary-btn { height: 40px; min-width: 180px; font-size: 1.1rem; }
