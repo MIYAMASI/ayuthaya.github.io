@@ -268,9 +268,7 @@ button, a { outline: none; }
 .orientation-warning { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; color: #d4af37; justify-content: center; align-items: center; font-size: 1.2rem; z-index: 9999; }
 @media screen and (orientation: portrait) { .orientation-warning { display: flex; } }
 
-/* ==========================================================================
-   Desktop / Tablet Responsive Fixes (ใช้กับหน้าจอใหญ่โดยไม่กระทบมือถือ)
-   ========================================================================== */
+/* Desktop / Tablet Responsive Adjustments */
 @media screen and (min-width: 1024px) {
     .sidebar { width: 320px; padding: 20px; }
     .menu-item { padding: 14px; }
