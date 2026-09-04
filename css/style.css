@@ -20,7 +20,7 @@ button, a {
 }
 
 /* ==========================================
-   MOBILE & BASE STYLES (คงไว้ตามเดิม)
+   1. สไตล์เริ่มต้นสำหรับมือถือ (ของเดิมทั้งหมด)
    ========================================== */
 
 .game-wrapper {
@@ -66,6 +66,357 @@ button, a {
     display: flex; 
     justify-content: center; 
     align-items: center; 
+}
+
+.top-right { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.currency-badge {
+    background: rgba(0,0,0,0.6); 
+    padding: 4px 10px; 
+    border-radius: 15px;
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    font-weight: 500; 
+    font-size: 0.9rem;
+}
+
+.currency-icon { 
+    width: 20px; 
+    height: 20px; 
+}
+
+.add-btn {
+    background: #22c55e; 
+    border: none; 
+    color: white; 
+    width: 20px; 
+    height: 20px;
+    border-radius: 50%; 
+    font-weight: bold; 
+    cursor: pointer;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-left: 4px;
+}
+
+.main-container {
+    flex: 1; 
+    display: flex; 
+    justify-content: space-between;
+    padding: 10px 20px; 
+    gap: 15px; 
+    overflow: hidden;
+}
+
+.pack-section {
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    position: relative;
+}
+
+.pack-display { 
+    position: relative; 
+    cursor: pointer; 
+    text-align: center; 
+}
+
+.pack-img {
+    width: auto; 
+    max-width: 100%; 
+    height: 55vh; 
+    object-fit: contain;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+    transition: transform 0.2s ease;
+}
+
+.pack-display:hover .pack-img { 
+    transform: scale(1.03); 
+}
+
+.open-btn {
+    position: absolute; 
+    bottom: -15px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #eab308, #ca8a04); 
+    color: black;
+    border: 2px solid #fef08a; 
+    padding: 6px 20px; 
+    border-radius: 20px;
+    font-weight: 700; 
+    font-size: 0.9rem; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    cursor: pointer; 
+    white-space: nowrap;
+}
+
+.info-section {
+    width: 320px; 
+    flex-shrink: 0; 
+    display: flex; 
+    flex-direction: column;
+    gap: 10px; 
+    justify-content: center;
+}
+
+.info-card {
+    background: rgba(15, 23, 42, 0.75); 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 12px;
+    padding: 12px 15px; 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.info-card h2 { 
+    font-size: 1.1rem; 
+    color: #fde047; 
+    margin-bottom: 4px; 
+}
+
+.info-card p { 
+    font-size: 0.8rem; 
+    color: #94a3b8; 
+    line-height: 1.3; 
+}
+
+.odds-title { 
+    font-size: 0.85rem; 
+    font-weight: 700; 
+    color: white; 
+    margin-bottom: 8px; 
+}
+
+.odds-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px; 
+}
+
+.odds-item { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 0.8rem; 
+}
+
+.odds-name { 
+    color: #cbd5e1; 
+}
+
+.odds-val { 
+    font-weight: 700; 
+    color: #38bdf8; 
+}
+
+/* Modal Walkout / Player Details */
+.fullscreen-modal {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background: rgba(0,0,0,0.9); 
+    z-index: 1000;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.wo-container { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    cursor: pointer; 
+}
+
+.wo-card-img { 
+    height: 60vh; 
+    max-width: 90vw; 
+    object-fit: contain; 
+    animation: popIn 0.5s ease-out; 
+}
+
+.wo-name { 
+    font-size: 2rem; 
+    font-weight: 900; 
+    color: gold; 
+    text-shadow: 0 0 10px rgba(255,215,0,0.5); 
+    margin-top: 10px; 
+}
+
+.wo-tap { 
+    color: #888; 
+    font-size: 0.9rem; 
+    margin-top: 5px; 
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Player Details Grid & Elements */
+.pd-container {
+    display: flex; 
+    gap: 15px; 
+    width: 95%; 
+    max-width: 850px; 
+    height: 90vh;
+    background: rgba(10, 15, 30, 0.85); 
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px; 
+    padding: 12px; 
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.pd-close-btn {
+    position: absolute; 
+    top: 8px; 
+    right: 12px; 
+    background: none; 
+    border: none;
+    color: #fff; 
+    font-size: 1.2rem; 
+    cursor: pointer; 
+    z-index: 10;
+}
+
+.pd-left { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.pd-card-wrapper { 
+    height: 75vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.pd-card-img { 
+    height: 100%; 
+    max-width: 100%; 
+    object-fit: contain; 
+}
+
+.pd-right { 
+    flex: 1.2; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    overflow-y: auto; 
+}
+
+.pd-header { 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    padding-bottom: 4px; 
+}
+
+.pd-player-name { 
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    color: #fde047; 
+    line-height: 1.1; 
+}
+
+.pd-sub-info { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    margin-top: 4px; 
+    font-size: 0.8rem; 
+    color: #94a3b8; 
+}
+
+.pd-flag, .pd-club-logo { 
+    height: 16px; 
+    width: auto; 
+    object-fit: contain; 
+}
+
+.pd-feature-box {
+    background: rgba(255,255,255,0.03); 
+    border-radius: 6px; 
+    padding: 6px 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.pd-fb-header { 
+    font-size: 0.75rem; 
+    color: #94a3b8; 
+    margin-bottom: 4px; 
+    font-weight: 500; 
+}
+
+.pd-foot-container { 
+    display: flex; 
+    gap: 15px; 
+}
+
+.foot-single { 
+    display: flex; 
+    align-items: center; 
+    gap: 4px; 
+}
+
+.foot-svg { 
+    width: 14px; 
+    height: 20px; 
+    fill: #475569; 
+}
+
+.foot-active .foot-svg { 
+    fill: #38bdf8; 
+}
+
+.foot-val { 
+    font-size: 0.85rem; 
+    font-weight: 700; 
+    color: #cbd5e1; 
+}
+
+.foot-active .foot-val { 
+    color: #38bdf8; 
+}
+
+.pd-stats-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 6px; 
+}
+
+.pd-stat-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    background: rgba(0,0,0,0.2); 
+    padding: 3px 6px; 
+    border-radius: 4px; 
+}
+
+.pd-stat-val { 
+    font-size: 0.95rem; 
+    font-weight: 700; 
+    color: #38bdf8; 
+    min-width: 24px; 
+}
+
+.pd-stat-name { 
+    font-size: 0.75rem; 
+    color: #cbd5e1; 
 }
 
 .pd-fb-content { 
@@ -117,60 +468,207 @@ button, a {
 
 @keyframes flash {
     0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
 }
 
+.orientation-warning {
+    display: none;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background: #000; 
+    color: #fff; 
+    z-index: 9999;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 1.2rem;
+}
+
+@media screen and (orientation: portrait) {
+    .orientation-warning { display: flex; }
+    .game-wrapper { display: none; }
+}
+
+
 /* ==========================================
-   DESKTOP RESPONSIVE RESPONSIVENESS (สำหรับหน้าจอคอมพิวเตอร์)
+   2. ปรับแต่งสำหรับจอขนาดใหญ่ / คอมพิวเตอร์ (Responsive Scaling)
    ========================================== */
 
-@media (min-width: 1024px) {
-    /* ขยายขนาดฟอนต์หลักและ Top Bar สำหรับจอคอม */
+/* จอคอมพิวเตอร์และแท็บเล็ตขนาดใหญ่ (กว้าง 1024px ขึ้นไป) */
+@media screen and (min-width: 1024px) {
     .top-bar {
         height: 70px;
         padding: 0 30px;
     }
 
     .top-left h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
 
     .icon-btn {
-        width: 42px;
-        height: 42px;
+        width: 40px;
+        height: 40px;
         font-size: 1.2rem;
     }
 
-    /* ขยายสเกลปุ่ม ไอคอน และองค์ประกอบใน UI การ์ดนักเตะ/สไตล์การเล่น */
+    .currency-badge {
+        padding: 8px 16px;
+        font-size: 1.1rem;
+        border-radius: 20px;
+    }
+
+    .currency-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .add-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 1.1rem;
+    }
+
+    .main-container {
+        padding: 20px 50px;
+        gap: 40px;
+    }
+
+    .pack-img {
+        height: 65vh;
+    }
+
+    .open-btn {
+        padding: 10px 32px;
+        font-size: 1.15rem;
+        bottom: -20px;
+    }
+
+    .info-section {
+        width: 420px;
+        gap: 18px;
+    }
+
+    .info-card {
+        padding: 20px 24px;
+        border-radius: 16px;
+    }
+
+    .info-card h2 {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+    }
+
+    .info-card p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .odds-title {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+
+    .odds-item {
+        font-size: 1rem;
+    }
+
+    /* Modal Player Details บนจอคอม */
+    .pd-container {
+        max-width: 1100px;
+        height: 85vh;
+        padding: 24px;
+        gap: 30px;
+    }
+
+    .pd-player-name {
+        font-size: 1.8rem;
+    }
+
+    .pd-sub-info {
+        font-size: 1rem;
+        gap: 12px;
+    }
+
+    .pd-flag, .pd-club-logo {
+        height: 22px;
+    }
+
+    .pd-feature-box {
+        padding: 12px 16px;
+    }
+
+    .pd-fb-header {
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .foot-svg {
+        width: 18px;
+        height: 26px;
+    }
+
+    .foot-val {
+        font-size: 1.1rem;
+    }
+
+    .pd-stat-item {
+        padding: 6px 12px;
+    }
+
+    .pd-stat-val {
+        font-size: 1.2rem;
+        min-width: 32px;
+    }
+
+    .pd-stat-name {
+        font-size: 0.95rem;
+    }
+
     .pd-ui-ps-icon {
-        width: 60px;
-        height: 52px;
-        padding: 4px;
-        border-radius: 6px;
+        width: 58px;
+        height: 50px;
     }
 
-    .pd-fb-content {
-        gap: 10px;
-        min-height: 40px;
+    .wo-card-img {
+        height: 70vh;
     }
 
-    /* เพิ่มพื้นที่ container ให้พอดีกับหน้าจอใหญ่ โดยจัดกึ่งกลางสวยงาม */
-    .game-wrapper {
-        max-width: 1920px;
-        margin: 0 auto;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    .wo-name {
+        font-size: 2.8rem;
+    }
+
+    .wo-tap {
+        font-size: 1.1rem;
     }
 }
 
-@media (min-width: 1440px) {
-    /* ปรับขนาดเพิ่มเติมสำหรับหน้าจอความละเอียดสูง (2K/4K) */
+/* จอคอมพิวเตอร์ความละเอียดสูง Ultra-Wide / 2K / 4K (กว้าง 1600px ขึ้นไป) */
+@media screen and (min-width: 1600px) {
     .top-left h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
 
-    .pd-ui-ps-icon {
-        width: 72px;
-        height: 62px;
+    .pack-img {
+        height: 70vh;
+    }
+
+    .info-section {
+        width: 500px;
+    }
+
+    .info-card h2 {
+        font-size: 1.7rem;
+    }
+
+    .info-card p, .odds-item {
+        font-size: 1.15rem;
+    }
+
+    .open-btn {
+        font-size: 1.3rem;
+        padding: 12px 40px;
     }
 }
