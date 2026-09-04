@@ -13,7 +13,6 @@ html, body {
     overflow: hidden; 
     background-color: #000; 
     color: white; 
-    font-size: 16px; /* Base font size */
 }
 
 button, a { 
@@ -21,8 +20,9 @@ button, a {
 }
 
 /* ==========================================
-   GAME WRAPPER & CONTAINER
+   MOBILE & BASE STYLES (คงไว้ตามเดิม)
    ========================================== */
+
 .game-wrapper {
     display: flex; 
     flex-direction: column; 
@@ -31,30 +31,26 @@ button, a {
     background: url('../assets/images/walk_out/pantheon.png') center/cover no-repeat;
     background-color: rgba(0, 0, 0, 0.5); 
     background-blend-mode: overlay;
-    position: relative;
 }
 
-/* ==========================================
-   TOP BAR
-   ========================================== */
 .top-bar { 
-    height: clamp(50px, 8vh, 80px); 
+    height: 50px; 
     flex-shrink: 0; 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    padding: 0 2vw; 
+    padding: 0 15px; 
     z-index: 10; 
 }
 
 .top-left { 
     display: flex; 
     align-items: center; 
-    gap: 12px; 
+    gap: 10px; 
 }
 
 .top-left h1 { 
-    font-size: clamp(1.2rem, 2vw, 2rem); 
+    font-size: 1.2rem; 
     text-shadow: 1px 1px 3px black; 
     font-weight: 700;
 }
@@ -63,213 +59,39 @@ button, a {
     background: rgba(0,0,0,0.5); 
     color: white; 
     border: none; 
-    width: clamp(30px, 4vw, 45px); 
-    height: clamp(30px, 4vw, 45px); 
+    width: 30px; 
+    height: 30px; 
     border-radius: 50%; 
     cursor: pointer; 
     display: flex; 
     justify-content: center; 
-    align-items: center;
-    font-size: clamp(1rem, 1.5vw, 1.5rem);
-}
-
-.currency-badge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(0,0,0,0.6);
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
-    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
-}
-
-.currency-icon {
-    width: clamp(20px, 2.5vw, 32px);
-    height: clamp(20px, 2.5vw, 32px);
-    object-fit: contain;
-}
-
-.add-btn {
-    background: #22c55e;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: clamp(20px, 2vw, 28px);
-    height: clamp(20px, 2vw, 28px);
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* ==========================================
-   PLAYER DETAILS OVERLAY / MODAL
-   ========================================== */
-#player-details-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.85);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2vw;
-}
-
-.pd-container {
-    display: flex;
-    flex-direction: row;
-    width: min(95%, 1200px);
-    height: min(90%, 700px);
-    background: #111827;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.15);
-    overflow: hidden;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-}
-
-.pd-left {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle, rgba(31,41,55,1) 0%, rgba(17,24,39,1) 100%);
-    padding: 20px;
-}
-
-.pd-card-img {
-    max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-}
-
-.pd-right {
-    flex: 1.2;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    overflow-y: auto;
-}
-
-.pd-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 12px;
-}
-
-.pd-title {
-    font-size: clamp(1.4rem, 2.2vw, 2.2rem);
-    font-weight: 700;
-    color: #fff;
-}
-
-.pd-close-btn {
-    background: transparent;
-    border: none;
-    color: #9ca3af;
-    font-size: clamp(1.5rem, 2vw, 2.2rem);
-    cursor: pointer;
-}
-
-.pd-close-btn:hover {
-    color: #fff;
-}
-
-/* Stat Grid */
-.pd-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-.pd-stat-item {
-    background: rgba(255,255,255,0.05);
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.pd-stat-val {
-    font-size: clamp(1.2rem, 1.8vw, 1.8rem);
-    font-weight: 700;
-    color: #38bdf8;
-}
-
-.pd-stat-name {
-    font-size: clamp(0.75rem, 1vw, 0.95rem);
-    color: #9ca3af;
-}
-
-/* Feature Box & Playstyles */
-.pd-feature-box {
-    background: rgba(0,0,0,0.3);
-    border-radius: 8px;
-    padding: 12px;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-
-.pd-fb-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: clamp(0.8rem, 1.1vw, 1rem);
-    color: #cbd5e1;
-    margin-bottom: 8px;
+    align-items: center; 
 }
 
 .pd-fb-content { 
     display: flex; 
     align-items: center; 
-    gap: 10px; 
+    gap: 6px; 
     flex-wrap: wrap; 
-    min-height: 40px; 
+    min-height: 28px; 
 }
 
 #pd-ui-playstyles { 
     display: flex; 
-    gap: 8px; 
+    gap: 6px; 
     flex-wrap: wrap; 
 }
 
 .pd-ui-ps-icon {
-    width: clamp(40px, 3.5vw, 56px); 
-    height: clamp(36px, 3vw, 48px); 
+    width: 46px; 
+    height: 40px; 
     object-fit: contain;
     background: rgba(0,0,0,0.4); 
-    border-radius: 6px; 
-    padding: 4px; 
-    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px; 
+    padding: 2px; 
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Foot SVGs */
-.foot-single {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.foot-svg {
-    width: clamp(18px, 1.5vw, 24px);
-    height: clamp(28px, 2.2vw, 36px);
-    fill: #38bdf8;
-}
-
-.foot-val {
-    font-size: clamp(1rem, 1.4vw, 1.4rem);
-    font-weight: bold;
-}
-
-/* Light Effects */
 #light-effect { 
     position: fixed; 
     top: 50%; 
@@ -294,18 +116,61 @@ button, a {
 }
 
 @keyframes flash {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
 }
 
-/* Orientation Warning for Mobile */
-.orientation-warning {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    color: #
+/* ==========================================
+   DESKTOP RESPONSIVE RESPONSIVENESS (สำหรับหน้าจอคอมพิวเตอร์)
+   ========================================== */
+
+@media (min-width: 1024px) {
+    /* ขยายขนาดฟอนต์หลักและ Top Bar สำหรับจอคอม */
+    .top-bar {
+        height: 70px;
+        padding: 0 30px;
+    }
+
+    .top-left h1 {
+        font-size: 1.8rem;
+    }
+
+    .icon-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+
+    /* ขยายสเกลปุ่ม ไอคอน และองค์ประกอบใน UI การ์ดนักเตะ/สไตล์การเล่น */
+    .pd-ui-ps-icon {
+        width: 60px;
+        height: 52px;
+        padding: 4px;
+        border-radius: 6px;
+    }
+
+    .pd-fb-content {
+        gap: 10px;
+        min-height: 40px;
+    }
+
+    /* เพิ่มพื้นที่ container ให้พอดีกับหน้าจอใหญ่ โดยจัดกึ่งกลางสวยงาม */
+    .game-wrapper {
+        max-width: 1920px;
+        margin: 0 auto;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    }
+}
+
+@media (min-width: 1440px) {
+    /* ปรับขนาดเพิ่มเติมสำหรับหน้าจอความละเอียดสูง (2K/4K) */
+    .top-left h1 {
+        font-size: 2.2rem;
+    }
+
+    .pd-ui-ps-icon {
+        width: 72px;
+        height: 62px;
+    }
+}
